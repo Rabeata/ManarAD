@@ -1,0 +1,85 @@
+@model Entities.Account
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<div class="container">
+  <div class="page-header">
+    <h1>Injaz4U</h1>
+    <a class="btn btn-info" href="/admin">Accounts</a>
+    <a class="btn btn-info" href="/admin/add">Add Account</a>
+  </div>
+  <div class="col-md-12 body-content">
+
+    <h1> Edit Page</h1>
+
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      @using (Html.BeginForm("SaveEdit", "Admin", FormMethod.Post))
+      {
+        <table class="table table-hover">
+
+          <tr>
+            <td>
+              <div class="col-md-4">
+                <label>Account ID : </label>
+                @Html.TextBoxFor(m => m.Id, new { @class = "form-control", @readonly = true })
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="col-md-4">
+                <label>Account Name : </label>
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="col-md-4">
+                <label>Mobile NO. : </label>
+                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control" })
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="col-md-4">
+                <label>Account Status : </label>
+                @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
+                   { new SelectListItem{Text="Enabled", Value=@Entities.AccountStatus.Enabled.ToString()},
+                     new SelectListItem{Text="Disabled", Value=@Entities.AccountStatus.Disabled.ToString()}},
+                     new { @class = "form-control", style = "height:auto;" })
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="col-md-4">
+                <label>Notes : </label>
+                @Html.TextBoxFor(m => m.Notes, new { @class = "form-control" })
+              </div>
+            </td>
+          </tr>
+
+        </table>
+        <div class="col-md-1">
+          <input type="submit" class="btn btn-success" value="Save" />
+
+        </div>
+      }
+
+      <div class="col-md-1">
+        @using (Html.BeginForm("RedirectHome", "Admin", FormMethod.Get))
+      {
+    <!-- form goes here -->
+
+          <input type="submit" class="btn btn-success" value="Cancel" />
+        }
+
+      </div>
+    </div>
+  </div>
+</div>

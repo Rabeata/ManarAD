@@ -1,0 +1,16 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h3>هل أنت متأكد من حذف النوع:<small> {{item.title}}</small></h3>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <a mat-raised-button [routerLink]="['/Types/']" color="primary">
+    لا
+      </a>
+      <button mat-raised-button (click)="onDelete()" color="warn">
+       نعم
+      </button>
+    </div>
+  </div>
+</div>

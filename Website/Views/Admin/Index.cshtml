@@ -1,0 +1,87 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>Injaz4U</h1>
+    <a class="btn btn-info" href="/admin">Accounts</a>
+    <a class="btn btn-info" href="/admin/add">Add Account</a>
+  </div>
+
+  <div class="col-md-12 body-content">
+
+
+
+
+    <h1>Administrator</h1>
+
+    @using (Html.BeginForm("Add", "Admin", FormMethod.Post))
+    {
+    <!-- form goes here -->
+
+      <input type="submit" class="btn btn-success" value="Add" />
+    }
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <table class="table table-hover">
+
+        <thead>
+
+          <tr>
+
+            <th>ID</th>
+            <th>Account Name</th>
+            <th>Mobile NO.</th>
+            <th>Status</th>
+            <th>NO. of users</th>
+            <th>Notes</th>
+            <th>-</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in ViewBag.Accounts)
+      {
+            <tr>
+              <td>
+                @item.Id
+              </td>
+              <td>
+                <a href="admin/details/@item.Id">@item.Title</a>
+                
+              </td>
+              <td>
+                @item.Mobile
+              </td>
+              <td>
+                @item.Status
+              </td>
+              <td>
+                @item.NumOfUsers  
+              </td>
+              <td>
+                @item.Notes
+              </td>
+              <td>
+                @using (Html.BeginForm("Edit", "Admin", FormMethod.Get))
+                {
+    <!-- form goes here -->
+                  <input type="hidden" name="Id" value="@item.Id" />
+                  <input type="submit" class="btn btn-default btn-round" value="Edit" />
+                }
+
+                <a href="admin/delete/@item.Id" class="btn btn-default btn-round">Delete</a>
+
+     
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

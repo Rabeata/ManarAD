@@ -1,0 +1,75 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+          <h4 style="text-align:right">الشركات</h4>
+              <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="title_right row"  >
+                        <a mat-raised-button [routerLink]="['/Company/add']" style="background-color:limegreen">
+                       اضافة
+                        </a>
+            </div>
+            <br>
+            <mat-card>
+              <form (ngSubmit)="filterData()" class="ngForm form-horizontal row">
+
+
+                <mat-form-field class="col-md-4">
+                  <input matInput [(ngModel)]="filter.title" id="title" name="title" placeholder="اسم الشركة">
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" type="submit">
+                  بحث
+                </button>
+              </form>
+            </mat-card>
+              <div class="clearfix"><br /> </div>
+              <mat-card>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+      
+                      <th>الشركة</th>
+     
+                      <th>-</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of items; let i = index;">
+                     <td style="text-align:right"><a [routerLink]="['/Company/details', item.id]">{{item.title}}</a></td>
+                    <td>
+                        <a mat-raised-button color="primary" [routerLink]="['/Company/edit', item.id]">
+                          تعديل
+                        </a>
+                        <a mat-raised-button color="warn" [routerLink]="['/Company/delete', item.id]">
+                          حذف
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </mat-card>
+              <mat-card>
+                <div style="text-align:center">
+
+                  <div class="col-md-4 title_left">
+
+                    <button class="btn btn-default btn-round" (click)="goToPage(-1)" *ngIf="page > 1">
+                      <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                  <div class="col-md-4 title_left">
+                    صفحة {{page}} من {{totalpages}}
+                  </div>
+                  <div class="col-md-4 title_right">
+
+                    <button class="btn btn-default btn-round" (click)="goToPage(1)" *ngIf="page < totalpages">
+                      <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </mat-card>
+</div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<div class="container">
+  <div class="page-header">
+    <h1>Injaz4U</h1>
+    <a class="btn btn-info" href="/admin">Accounts</a>
+    <a class="btn btn-info" href="/admin/add">Add Account</a>
+  </div>
+  <div class="col-md-12 body-content">
+
+    <h1> Are you sure to delete this Account : @ViewBag.MyUser.fullName</h1>
+
+    <div class="col-md-1">
+      <a href="/admin/deleteuser/@ViewBag.MyUser.Id/true" class="btn btn-success">Delete</a>
+    </div>
+
+
+
+
+    <div class="col-md-1">
+      <a href="admin/details/@ViewBag.MyUser.AccountId" class="btn btn-success">Cancel</a>
+
+
+    </div>
+
+
+  </div>
+</div>

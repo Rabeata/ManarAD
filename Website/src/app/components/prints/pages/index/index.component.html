@@ -1,0 +1,137 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h4 style="text-align:right">الطلبيات</h4>
+              <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="title_right row"  >
+                        <a mat-raised-button [routerLink]="['/Prints/add']" style="background-color:limegreen">
+                       اضافة
+                        </a>
+            </div>
+            <br>
+            <mat-card>
+              <form (ngSubmit)="filterData()" class="ngForm form-horizontal row">
+
+
+                <mat-form-field class="col-md-4">
+                  <input matInput [(ngModel)]="filter.title" id="title" name="title" placeholder="اسم الطلبية">
+                </mat-form-field>
+                <mat-form-field class="col-md-4">
+
+                  <mat-select [(ngModel)]="filter.companyId" id="companyId" name="companyId">
+                    <mat-option [value]="0">
+                      اسم الشركة
+                    </mat-option>
+                    <mat-option *ngFor="let company of companies" [value]="company.id">
+                      {{company.title}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-placeholder style="float:right">اسم الشركة</mat-placeholder>
+
+                    
+                </mat-form-field>
+                <mat-form-field class="col-md-4">
+                  <mat-select [(ngModel)]="filter.typeId" id="typeId" name="typeId">
+                    <mat-option [value]="0">
+                      نوع الطلبية
+                    </mat-option>
+                    <mat-option *ngFor="let type of types" [value]="type.id">
+                      {{type.title}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-placeholder style="float:right">نوع الطلبية</mat-placeholder>
+                </mat-form-field>
+                <mat-form-field class="col-md-4">
+                  <input matInput [(ngModel)]="filter.createdAt" id="createdAt" name="createdAt" [matDatepicker]="picker"
+                     style="text-align:right">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-placeholder style="float:right">من تاريخ</mat-placeholder>
+
+                </mat-form-field>
+
+                <mat-form-field class="col-md-4">
+                  <input matInput [(ngModel)]="filter.updatedAt" id="updatedAt" name="updatedAt" [matDatepicker]="picker3"
+                        style="text-align:right">
+                  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                  <mat-datepicker #picker3></mat-datepicker>
+                  <mat-placeholder style="float:right">إلى تاريخ </mat-placeholder>
+
+                </mat-form-field>
+
+
+                <button mat-raised-button color="primary" type="submit">
+                  بحث
+                </button>
+                <a mat-raised-button style="background-color:darkorange" [href]="ExportXls()"  target="_blank">
+                  تصدير اكسل
+                </a>
+              </form>
+            </mat-card>
+              <div class="clearfix"><br /> </div>
+              <mat-card>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>رقم الطلبية</th>
+                      <th>اسم الطلبية</th>
+                      <th>اسم الشركة</th>
+                      <th>نوع الطلبية</th>
+                      <th>الطول</th>
+                      <th>العرض</th>
+                      <th>العدد</th>
+                      <th>المساحة الكلية</th>
+                      <th>ملاحظات</th>
+                      <th>التاريخ</th>
+                      <th>-</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of items; let i = index;">
+                      <th style="text-align:right" scope="row">{{item.id}}</th>
+                      <td style="text-align:right"><a [routerLink]="['/Prints/details', item.id]">{{item.title}}</a></td>
+                      <td style="text-align:right">{{item.company?.title}}</td>
+                      <td style="text-align:right">{{item.type?.title}}</td>
+                      <td style="text-align:right">{{item.height}}</td>
+                      <td style="text-align:right">{{item.width}}</td>
+                      <td style="text-align:right">{{item.pnumber}}</td>
+                      <td style="text-align:right">{{item.height * item.width * item.pnumber}}</td>
+                      <td style="text-align:right">{{item.notes}}</td>
+                      <td style="text-align:right">{{item.createdAt | date:'dd/MM/yyyy'}}</td>
+                      <td>
+                        <a mat-raised-button  color="primary" [routerLink]="['/Prints/edit', item.id]">
+                         تعديل
+                        </a>
+                        <a mat-raised-button  color="warn"  [routerLink]="['/Prints/delete', item.id]">
+                         حذف
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </mat-card>
+              <mat-card>
+                <div style="text-align:center">
+
+                  <div class="col-md-4 title_left">
+
+                    <button class="btn btn-default btn-round" (click)="goToPage(-1)" *ngIf="page > 1">
+                      <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                  <div class="col-md-4 title_left">
+                    صفحة {{page}} من {{totalpages}}
+                  </div>
+                  <div class="col-md-4 title_right">
+
+                    <button class="btn btn-default btn-round" (click)="goToPage(1)" *ngIf="page < totalpages">
+                      <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </mat-card>
+</div>
+    </div>
+</div>

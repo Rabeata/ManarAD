@@ -1,0 +1,30 @@
+
+  <div class='navbar'>
+    <div class='navbar-header'>
+      <div class='navbar-brand'>
+
+
+      </div>
+    </div>
+    <div class='clearfix'></div>
+    <div class='navbar-collapse {{collapse}}'>
+      <ul class='nav '>
+        <li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/Prints']">
+            <span class='glyphicon glyphicon-home'></span> الطلبيات
+          </a>
+        </li>
+        <li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/Company']">
+            <span class='glyphicon glyphicon-home'></span> الشركات
+          </a>
+        </li>
+        <li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/Types']">
+            <span class='glyphicon glyphicon-home'></span> أنواع الطلبيات
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>

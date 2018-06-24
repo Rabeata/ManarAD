@@ -1,0 +1,59 @@
+﻿@model AspCoreServer.Models.LoginViewModel
+@{
+string loginPageLabel="Login Page";
+string loginBtnLabel="Login";
+string usernameLabel="Mobile";
+string passwordLabel="Password";
+string rememberMeLabel="Remember My Login";
+string invalidLoginRequestLabel="Invalid login request";
+string invalidLoginRequestMsgLabel=" There are no login schemes configured for this client.";
+}
+<div class="container" >
+   
+
+    @Html.Partial("_ValidationSummary")
+
+    <div class="row">
+
+        
+            <div class="col-sm-6">
+                <div >
+                     
+                    <div >
+
+                        <form asp-route="Login" method="post">
+                            <input type="hidden" asp-for="ReturnUrl" />
+
+                            <fieldset>
+                                <div class="form-group">
+                                    <label asp-for="Username">@usernameLabel</label>
+                                    <input class="form-control" placeholder="@usernameLabel" name="Username" asp-for="Username" autofocus >
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Password">@passwordLabel</label>
+                                    <input type="password" class="form-control" placeholder="@passwordLabel" name="password" asp-for="Password" autocomplete="off">
+                                </div>
+                                
+                                 
+                                    <div class="form-group login-remember">
+                                        <label asp-for="RememberLogin">
+                                            <input type="checkbox" asp-for="RememberLogin">
+                                            <strong>@rememberMeLabel</strong>
+                                        </label>
+                                    </div>
+                                
+                                <div class="form-group">
+                                    <button class="btn btn-primary">@loginBtnLabel</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+         
+
+      
+          
+        
+    </div>
+</div>

@@ -1,0 +1,103 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<div class="container">
+  <div class="page-header">
+    <h1>Injaz4U</h1>
+    <a class="btn btn-info" href="/admin">Accounts</a>
+    <a class="btn btn-info" href="/admin/add">Add Account</a>
+  </div>
+  <div class="col-md-12 body-content">
+
+
+
+
+    <h1>@ViewBag.MyAccount.Title</h1>
+    <!-- <a href="admin/details/@ViewBag.MyAccount.Id/adduser" class="btn btn-default btn-round">Add User</a>
+    -->
+
+    @using (Html.BeginForm("AddUser", "Admin", FormMethod.Post))
+    {
+    <!-- form goes here -->
+      <input type="hidden" name="Id" value="@ViewBag.MyAccount.Id" />
+      <input type="submit" class="btn btn-success" value="Add User" />
+    }
+    <h2>@ViewBag.AddingStatus1</h2>
+    <h2>@ViewBag.AddingStatus</h2>
+    @{
+        if (ViewBag.Error1 == "0")
+        {
+          <h5 style="color:darkred">عليك اضافة كلمة سر للمستخدم</h5>
+          <br />
+        }
+
+       else if (ViewBag.Error2 == "1")
+        {
+          <h5 style="color:darkred">كلمة السر أقل من 8 رموز</h5>
+          <br />
+        }
+        if (ViewBag.Error3 == "2")
+        {
+          <h5 style="color:darkred">يجب اضافة رقم الهاتف أو ربما رقم الهاتف مستخدم من قبل</h5>
+        }
+
+    }
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <table class="table table-hover">
+
+        <thead>
+
+          <tr>
+
+            <th>ID</th>
+            <th>User Full Name</th>
+            <th>Mobile NO.</th>
+            <th>Status</th>
+            <th>Login As</th>
+
+            <th>-</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in ViewBag.AccountUsers)
+      {
+            <tr>
+              <td>
+                @item.Id
+              </td>
+              <td>
+                @item.fullName
+
+              </td>
+              <td>
+                @item.UserName
+              </td>
+              <td>
+                @item.Status
+              </td>
+              <td>
+                @using (Html.BeginForm("LoginAs", "Admin", FormMethod.Post))
+                {
+                  <input type="hidden" name="Id" value=" @item.Id" />
+                  <input type="submit" class="btn btn-default btn-round" value="Login As" />
+                }
+              </td>
+              <td>
+                @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post))
+                {
+                  <input type="hidden" name="Id" value="@item.Id" />
+                  <input type="submit" class="btn btn-default btn-round" value="Edit" />
+                }
+                <a href="admin/deleteuser/@item.Id" class="btn btn-default btn-round">Delete</a>
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
